@@ -127,7 +127,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         addMarker(test12);
         addCircle(test12,200);
         LatLng test13 = new LatLng(36.30838571585318, 127.3750953326642);
+        addMarker(test13);
         addCircle(test13,200);
+        LatLng test14 = new LatLng(36.306975850624596, 127.33510896329774);
+        addMarker(test14);
+        addCircle(test14,200);
 
     }
 
