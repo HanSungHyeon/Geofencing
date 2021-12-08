@@ -11,6 +11,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.nfc.Tag;
@@ -86,7 +87,50 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             enableUserLocation();
         }
         mMap.setOnMapLongClickListener(this);
+        //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+        addMarker(Daejeon);
+        addCircle(Daejeon,100);
+        LatLng test1 = new LatLng(36.3158, 127.4078);
+        addMarker(test1);
+        addCircle(test1,200);
+        LatLng test2 = new LatLng(36.3928, 127.3106);
+        addMarker(test2);
+        addCircle(test2,200);
+        LatLng test3 = new LatLng(36.3475, 127.3672);
+        addMarker(test3);
+        addCircle(test3,200);
+        LatLng test4 = new LatLng(36.3297, 127.4335);
+        addMarker(test4);
+        addCircle(test4,200);
+        LatLng test5 = new LatLng(36.3270, 127.4355);
+        addMarker(test5);
+        addCircle(test5,200);
+        LatLng test6 = new LatLng(36.3427, 127.4355);
+        addMarker(test6);
+        addCircle(test6,200);
+        LatLng test7 = new LatLng(36.320367311799146, 127.44670115079852);
+        addMarker(test7);
+        addCircle(test7,200);
+        LatLng test8 = new LatLng(36.314625898945536, 127.43885417013675);
+        addMarker(test8);
+        addCircle(test8,200);
+        LatLng test9 = new LatLng(36.31963593242613, 127.41596131359827);
+        addMarker(test9);
+        addCircle(test9,200);
+        LatLng test10 = new LatLng(36.32158481820096, 127.40920281842763);
+        addMarker(test10);
+        addCircle(test10,200);
+        LatLng test11 = new LatLng(36.32624466592023, 127.39608393854492);
+        addMarker(test11);
+        addCircle(test11,200);
+        LatLng test12 = new LatLng(36.3046052445744, 127.38616914902406);
+        addMarker(test12);
+        addCircle(test12,200);
+        LatLng test13 = new LatLng(36.30838571585318, 127.3750953326642);
+        addCircle(test13,200);
+
     }
+
 
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
@@ -154,7 +198,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void tryAddingGeofence(LatLng latLng){
-        //mMap.clear();
+        mMap.clear();
         addMarker(latLng);
         addCircle(latLng, GEOFENCE_RADIUS);
         addGeofence(latLng, GEOFENCE_RADIUS);
