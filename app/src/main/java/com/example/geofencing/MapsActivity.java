@@ -14,6 +14,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
 import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,12 +31,16 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.geofencing.databinding.ActivityMapsBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+
+import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
     private static final String TAG = "MapsActivity";
@@ -47,6 +52,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String GEOFENCE_ID = "SOME_GEOFENCE_ID";
     private int FINE_LOCATION_ACCESS_REQUEST_CODE = 10001;
     private int BACKGROUD_LOCATION_ACCESS_REQUEST_CODE = 10002;
+    ArrayList<Taas> taaslist;
 
 
     @Override
@@ -63,20 +69,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         geofencingClient = LocationServices.getGeofencingClient(this);
         geofenceHelper = new GeofenceHelper(this);
+
+
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
 
         // Add a marker in Sydney and move the camera
         LatLng Daejeon = new LatLng(36.3353, 127.4565);
@@ -88,50 +88,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         mMap.setOnMapLongClickListener(this);
         //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-        addMarker(Daejeon);
-        addCircle(Daejeon,100);
-        LatLng test1 = new LatLng(36.3158, 127.4078);
-        addMarker(test1);
-        addCircle(test1,200);
-        LatLng test2 = new LatLng(36.3928, 127.3106);
-        addMarker(test2);
-        addCircle(test2,200);
-        LatLng test3 = new LatLng(36.3475, 127.3672);
-        addMarker(test3);
-        addCircle(test3,200);
-        LatLng test4 = new LatLng(36.3297, 127.4335);
-        addMarker(test4);
-        addCircle(test4,200);
-        LatLng test5 = new LatLng(36.3270, 127.4355);
-        addMarker(test5);
-        addCircle(test5,200);
-        LatLng test6 = new LatLng(36.3427, 127.4355);
-        addMarker(test6);
-        addCircle(test6,200);
-        LatLng test7 = new LatLng(36.320367311799146, 127.44670115079852);
-        addMarker(test7);
-        addCircle(test7,200);
-        LatLng test8 = new LatLng(36.314625898945536, 127.43885417013675);
-        addMarker(test8);
-        addCircle(test8,200);
-        LatLng test9 = new LatLng(36.31963593242613, 127.41596131359827);
-        addMarker(test9);
-        addCircle(test9,200);
-        LatLng test10 = new LatLng(36.32158481820096, 127.40920281842763);
-        addMarker(test10);
-        addCircle(test10,200);
-        LatLng test11 = new LatLng(36.32624466592023, 127.39608393854492);
-        addMarker(test11);
-        addCircle(test11,200);
-        LatLng test12 = new LatLng(36.3046052445744, 127.38616914902406);
-        addMarker(test12);
-        addCircle(test12,200);
-        LatLng test13 = new LatLng(36.30838571585318, 127.3750953326642);
-        addMarker(test13);
-        addCircle(test13,200);
-        LatLng test14 = new LatLng(36.306975850624596, 127.33510896329774);
-        addMarker(test14);
-        addCircle(test14,200);
+        taaslist();
+
+
 
     }
 
@@ -202,7 +161,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void tryAddingGeofence(LatLng latLng){
-        mMap.clear();
+        //mMap.clear();
         addMarker(latLng);
         addCircle(latLng, GEOFENCE_RADIUS);
         addGeofence(latLng, GEOFENCE_RADIUS);
@@ -238,9 +197,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     private void addMarker(LatLng latLng)   {
-        MarkerOptions markerOptions = new MarkerOptions().position(latLng);
+        MarkerOptions markerOptions = new MarkerOptions()
+                .position(latLng);
         mMap.addMarker(markerOptions);
-
 
     }
 
@@ -253,6 +212,50 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         circleOptions.strokeWidth(4);
         mMap.addCircle(circleOptions);
 
+    }
+
+
+    public void taaslist(){
+        ArrayList<Taas> taaslist = new ArrayList<>();
+        taaslist.add(new Taas(36.3158, 127.4078));
+        taaslist.add (new Taas(36.3158, 127.4078));
+        taaslist.add (new Taas(36.3928, 127.3106));
+        taaslist.add (new Taas(36.3475, 127.3672));
+        taaslist.add (new Taas(36.3297, 127.4335));
+        taaslist.add (new Taas(36.3270, 127.4355));
+        taaslist.add (new Taas(36.3427, 127.4355));
+        taaslist.add (new Taas(36.320367311799146, 127.44670115079852));
+        taaslist.add (new Taas(36.314625898945536, 127.43885417013675));
+        taaslist.add (new Taas(36.31963593242613, 127.41596131359827));
+        taaslist.add (new Taas(36.32158481820096, 127.40920281842763));
+        taaslist.add (new Taas(36.32624466592023, 127.39608393854492));
+        taaslist.add (new Taas(36.3046052445744, 127.38616914902406));
+        taaslist.add (new Taas(36.30838571585318, 127.3750953326642));
+        taaslist.add (new Taas(36.306975850624596, 127.33510896329774));
+        taaslist.add (new Taas(36.35336983785516, 127.33875278390722));
+
+        for(Taas taas:taaslist){
+            addMarkertest(taas);
+            addCircleTest(taas,200);
+        }
+    }
+
+    private Marker addMarkertest(Taas taas){
+        LatLng position = new LatLng(taas.getlat(),taas.getlon());
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(position);
+
+        return mMap.addMarker(markerOptions);
+    }
+    private Circle addCircleTest(Taas taas,float radius){
+        LatLng position = new LatLng(taas.getlat(),taas.getlon());
+        CircleOptions circleOptions = new CircleOptions();
+        circleOptions.center(position);
+        circleOptions.radius(radius);
+        circleOptions.strokeColor(Color.argb(255,255,0,0));
+        circleOptions.fillColor(Color.argb(64,255,0,0));
+        circleOptions.strokeWidth(4);
+        return mMap.addCircle(circleOptions);
     }
 
 }
