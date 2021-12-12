@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="EARGENCY"
-        android:textColor="#0536C8"
+        android:textColor="@color/firstred"
         android:textSize="50dp"
         android:textStyle="italic|bold" />
 

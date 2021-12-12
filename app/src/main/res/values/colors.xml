@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
     <color name="palate">#AFEEEE</color>
+    <color name="blue">#0536C8</color>
+    <color name ="firstred">#FE2E2E</color>
+    <color name="yellow">#FFFF00</color>
 </resources>
