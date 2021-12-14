@@ -162,12 +162,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //mMap.clear();
         addMarker(latLng);
         addCircle(latLng, GEOFENCE_RADIUS);
-        addGeofence(latLng, GEOFENCE_RADIUS);
+        //addGeofence(latLng, GEOFENCE_RADIUS);
     }
 
-    private void addGeofence(LatLng latLng, float radius) {
-
-        Geofence geofence = geofenceHelper.getGeofence(GEOFENCE_ID, latLng, radius, Geofence.GEOFENCE_TRANSITION_ENTER |
+    private void addGeofence(/*LatLng latLng*/Taas taas, float radius) {
+        LatLng position = new LatLng(taas.getlat(),taas.getlon());
+        Geofence geofence = geofenceHelper.getGeofence(GEOFENCE_ID, position, radius, Geofence.GEOFENCE_TRANSITION_ENTER |
                 Geofence.GEOFENCE_TRANSITION_DWELL | Geofence.GEOFENCE_TRANSITION_EXIT);
         GeofencingRequest geofencingRequest = geofenceHelper.getGeofencingRequest(geofence);
         PendingIntent pendingIntent = geofenceHelper.getPendingIntent();
@@ -222,19 +222,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         taaslist.add (new Taas(36.3297, 127.4335));
         taaslist.add (new Taas(36.3270, 127.4355));
         taaslist.add (new Taas(36.3427, 127.4355));
-        taaslist.add (new Taas(36.320367311799146, 127.44670115079852));
-        taaslist.add (new Taas(36.314625898945536, 127.43885417013675));
-        taaslist.add (new Taas(36.31963593242613, 127.41596131359827));
-        taaslist.add (new Taas(36.32158481820096, 127.40920281842763));
+        taaslist.add (new Taas(36.3203, 127.4467));
+        taaslist.add (new Taas(36.3146, 127.4388));
+        taaslist.add (new Taas(36.3196, 127.4159));
+        taaslist.add (new Taas(36.3215, 127.4092));
         taaslist.add (new Taas(36.32624466592023, 127.39608393854492));
         taaslist.add (new Taas(36.3046052445744, 127.38616914902406));
         taaslist.add (new Taas(36.30838571585318, 127.3750953326642));
         taaslist.add (new Taas(36.306975850624596, 127.33510896329774));
         taaslist.add (new Taas(36.35336983785516, 127.33875278390722));
+        taaslist.add (new Taas(36.35060962662878, 127.4414406951592));
+        taaslist.add (new Taas(36.32411811141908, 127.42755648512328));
+        taaslist.add(new Taas(36.32865393299976, 127.43417773248085));
+        taaslist.add(new Taas(36.34471660519038, 127.40173571154426));
+        taaslist.add(new Taas(36.36505739472767, 127.3782640758318));
+        taaslist.add(new Taas(36.35288572709863, 127.36878766972998));
+        taaslist.add(new Taas(36.351348516866686, 127.37846813684827));
+        taaslist.add(new Taas(36.35095066401503, 127.34009851701767));
+        taaslist.add(new Taas(36.317063281324785, 127.39165994408131));
+        taaslist.add(new Taas(36.322995374331484, 127.39579731060913));
+        taaslist.add(new Taas(36.34902224828835, 127.3900114546842));
+        taaslist.add(new Taas(36.34613602238069, 127.3847650538648));
+        taaslist.add(new Taas(36.33855285707191, 127.3931871314198));
+        taaslist.add(new Taas(36.43466707455801, 127.38525963494413));
+        taaslist.add(new Taas(36.32965614053835, 127.45449064605627));
 
         for(Taas taas:taaslist){
             addMarkertest(taas);
             addCircleTest(taas,200);
+            addGeofence(taas,200);
         }
     }
 
